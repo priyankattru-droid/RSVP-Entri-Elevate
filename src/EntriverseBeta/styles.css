@@ -1,0 +1,757 @@
+:root {
+  --surface\/background-default: #FFF;  /* This is the default background/screen colour& is used in most of the screens. */
+  --surface\/background-grey: #F0F0F0;  /* This is used mostly when there are pure white or grey-10 containers in the screen. Using this colour allows user to differentiate the background and the content on it. eg: Doubts. */
+  --surface\/primary-container: #FFF;  /* This is used for many containers which does not have pure  white background. eg: Cards in premium tab, containers in doubts. */
+  --surface\/secondary-container: #F6F6F6;  /* This is used for many containers which has white or grey-10 as background. eg: Input field of comments in doubts. */
+  --surface\/surface-outline: #F0F0F0;  /* This is used as outline for any type of container to distinguish and highlight them from the background.  */
+  --surface\/surface-outline-disabled: #FAFAFA;  /* This is used as outline for any type of container that is disabled or cannot take any action. */
+  --surface\/blue-outline: #0061B5;
+  --surface\/inverted-bg-default: #121212;
+  --surface\/inverted-bg-grey: #1E1E1E;
+  --text\/primary-text: #212121;  /* The text primary colour is used for titles, subtitles and copy which needs to be highlighted. */
+  --text\/subtext: #616161;  /* The subtext colour is used for body which includes paragraph, one liners and texts which is not important. */
+  --text\/placeholder-text: #949494;  /* The place holder text colour is used for texts in input fields. */
+  --text\/timestamp-text: #B2B2B2;  /* The time stamp is a unique case especially in groups where we need to handle a lot of time factors associated with the design. */
+  --text\/inverted-text: #F0F0F0;  /* The inverted text colour is used when the copy comes above another colour other than the respective background colour. */
+  --text\/disabled-text: #CFCFCF;  /* The disabled text colour represents all the texts that cannot be edited or an action cannot be taken. */
+  --text\/link-text: #0061B5;  /* The text link colour represents all the text that are clickable and redirected to another point. */
+  --icon\/default-icon: #212121;
+  --icon\/secondary-icon: #757575;
+  --icon\/inverted-icon: #F0F0F0;
+  --icon\/placeholder-icon: #B2B2B2;
+  --icon\/disabled-icon: #CFCFCF;
+  --icon\/blue-icon: #0089FF;
+  --icon\/green-icon: #00805C;
+  --icon\/purple-icon: #7F3E98;
+  --icon\/orange-icon: #FFA000;
+  --icon\/yellow-icon: #FFD428;
+  --icon\/brown-icon: #BE7967;
+  --icon\/gold-icon: #D29F13;
+  --extras\/fixed-white: #FFF;
+  --extras\/fixed-black: #212121;
+  --extras\/fixed-pure-black: #000;
+  --entri-blue\/entri-blue: #0089FF;
+  --entri-blue\/on-blue: #FFF;
+  --entri-blue\/blue-container: #E6F3FF;
+  --entri-blue\/on-blue-container: #004B8C;
+  --entri-blue\/blue-hover: #004B8C;
+  --entri-green\/entri-green: #00805C;
+  --entri-green\/on-green: #FFF;
+  --entri-green\/green-container: #E6F2EF;
+  --entri-green\/on-green-container: #004633;
+  --entri-green\/green-hover: #004633;
+  --entri-purple\/entri-purple: #7F3E98;
+  --entri-purple\/on-purple: #FFF;
+  --entri-purple\/purple-container: #F2ECF5;
+  --entri-purple\/on-purple-container: #462254;
+  --entri-purple\/purple-hover: #462254;
+  --entri-orange\/entri-orange: #FFA000;
+  --entri-orange\/on-orange: #212121;
+  --entri-orange\/orange-container: #FFF6E6;
+  --entri-orange\/on-orange-container: #8C5800;
+  --entri-orange\/orange-hover: #8C5800;
+  --entri-yellow\/entri-yellow: #FFD428;
+  --entri-yellow\/on-yellow: #212121;
+  --entri-yellow\/yellow-container: #FFFBEA;
+  --entri-yellow\/on-yellow-container: #8C7516;
+  --entri-yellow\/yellow-hover: #8C7516;
+  --entri-brown\/entri-brown: #BE7967;
+  --entri-brown\/on-brown: #FFF;
+  --entri-brown\/brown-container: #F9F2F0;
+  --entri-brown\/on-brown-container: #694339;
+  --entri-brown\/brown-hover: #694339;
+  --entri-gold\/entri-gold: #D29F13;
+  --entri-gold\/on-gold: #212121;
+  --entri-gold\/gold-container: #FAF5E7;
+  --entri-gold\/on-gold-container: #74570A;
+  --entri-gold\/gold-hover: #74570A;
+  --spacing\/spacing-none: 0;
+  --spacing\/spacing-xs: 2;
+  --spacing\/spacing-s: 4;
+  --spacing\/spacing-m: 8;
+  --spacing\/spacing-l: 12;
+  --spacing\/spacing-xl: 16;
+  --spacing\/spacing-2xl: 24;
+  --spacing\/spacing-3xl: 32;
+  --spacing\/spacing-4xl: 40;
+  --spacing\/spacing-5xl: 48;
+  --spacing\/spacing-6xl: 56;
+  --spacing\/spacing-7xl: 64;
+  --spacing\/spacing-8xl: 120;
+  --corner-radius\/corner-radius-none: 0;  /* Banners
+Bottom app bars
+Full-screen dialogs
+Lists
+Navigation bars
+Navigation rails
+Progress indicators
+Search view (full-screen)
+Side sheets (docked)
+Tabs
+Top app bars */
+  --corner-radius\/corner-radius-xs: 2;  /* Autocomplete menu
+Select menu
+Snackbars
+Standard menu
+Text fields */
+  --text\/link-text-hover: #004B8C;
+  --corner-radius\/corner-radius-s: 4;  /* Chips
+Rich tooltip */
+  --text\/link-text-visited: #5A2C6C;
+  --corner-radius\/corner-radius-m: 8;  /* Cards
+Small FABs */
+  --corner-radius\/corner-radius-l: 16;  /* Extended FABs
+FABs
+Navigation drawers */
+  --corner-radius\/corner-radius-xl: 24;  /* Bottom sheets (docked)
+Dialogs
+Floating sheets
+Large FABs
+Search view (docked)
+Time picker
+Time input */
+  --corner-radius\/corner-radius-2xl: 32;
+  --corner-radius\/corner-radius-3xl: 40;
+  --corner-radius\/corner-radius-4xl: 48;
+  --corner-radius\/corner-radius-full: 200;  /* Badge
+Buttons
+Icon buttons
+Sliders
+Switches
+Search bar */
+  --error\/error-color: #F65A5B;
+  --error\/on-error: #FFF;
+  --error\/error-text-color: #F65A5B;
+  --error\/error-outline-color: #873232;
+  --error\/error-container: #FEEFEF;
+  --error\/on-error-container: #873232;
+  --error\/error-hover: #873232;
+  --success\/success-color: #00805C;
+  --success\/on-success: #FFF;
+  --success\/success-text-color: #00805C;
+  --success\/success-outline-color: #004633;
+  --success\/success-container: #E6F2EF;
+  --success\/on-success-container: #004633;
+  --success\/success-hover: #004633;
+  --overlay\/mode-dependant\/dark-level-0: #0000;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/dark-level-1: #0003;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/dark-level-2: #0006;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/dark-level-3: #0009;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/dark-level-4: #000C;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/dark-level-5: #000000E5;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/dark-level-6: #000;  /* Use if you want dark overlay for light theme & light overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-0: #FFF0;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-1: #FFF3;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-2: #FFF6;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-3: #FFF9;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-4: #FFFC;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-5: #FFFFFFE5;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/mode-dependant\/light-level-6: #FFF;  /* Use if you want Light overlay for Light theme & Dark overlay for Dark theme */
+  --overlay\/fixed-black\/fixed-black-level-0: #0000;
+  --overlay\/fixed-black\/fixed-black-level-1: #0003;
+  --overlay\/fixed-black\/fixed-black-level-2: #0006;
+  --overlay\/fixed-black\/fixed-black-level-3: #0009;
+  --overlay\/fixed-black\/fixed-black-level-4: #000C;
+  --overlay\/fixed-black\/fixed-black-level-5: #000000E5;
+  --overlay\/fixed-black\/fixed-black-level-6: #000;
+  --overlay\/fixed-white\/fixed-white-level-0: #FFF0;
+  --overlay\/fixed-white\/fixed-white-level-1: #FFF3;
+  --overlay\/fixed-white\/fixed-white-level-2: #FFF6;
+  --overlay\/fixed-white\/fixed-white-level-3: #FFF9;
+  --overlay\/fixed-white\/fixed-white-level-4: #FFFC;
+  --overlay\/fixed-white\/fixed-white-level-5: #FFFFFFE5;
+  --overlay\/fixed-white\/fixed-white-level-6: #FFF;
+  --label\/body-default\/body-sans-default-font-size: 14;
+  --label\/body-default\/body-sans-default-weight-regular: 400;
+  --label\/body-default\/body-sans-default-weight-medium: 500;
+  --label\/body-default\/body-sans-default-weight-bold: 600;
+  --label\/body-default\/body-sans-default-letter-spacing: 0.25;
+  --label\/body-large\/body-sans-large-font-size: 16;
+  --label\/body-large\/body-sans-large-weight-regular: 400;
+  --label\/body-large\/body-sans-large-weight-medium: 500;
+  --label\/body-large\/body-sans-large-weight-bold: 600;
+  --label\/body-large\/body-sans-large-letter-spacing: 0;
+  --label\/body-serif\/body-serif-default-font-size: 14;
+  --label\/body-serif\/body-serif-default-weight-regular: 400;
+  --label\/body-serif\/body-serif-default-weight-medium: 500;
+  --label\/body-serif\/body-serif-default-weight-bold: 700;
+  --label\/body-serif\/body-serif-default-letter-spacing: 0.25;
+  --label\/body-serif-large\/body-serif-large-font-size: 16;
+  --label\/body-serif-large\/body-serif-large-weight-regular: 400;
+  --label\/body-serif-large\/body-serif-large-weight-medium: 500;
+  --label\/body-serif-large\/body-serif-large-weight-bold: 600;
+  --label\/body-serif-large\/body-serif-large-letter-spacing: 0;
+  --label\/caption-default\/caption-default-font-size: 12;
+  --label\/caption-default\/caption-default-weight-regular: 400;
+  --label\/caption-default\/caption-default-weight-medium: 500;
+  --label\/caption-default\/caption-default-weight-bold: 700;
+  --label\/caption-default\/caption-default-letter-spacing: 0.25;
+  --label\/caption-small\/caption-small-font-size: 10;
+  --label\/caption-small\/caption-small-weight-regular: 400;
+  --label\/caption-small\/caption-small-weight-medium: 500;
+  --label\/caption-small\/caption-small-weight-bold: 700;
+  --label\/caption-small\/caption-small-letter-spacing: 0.25;
+  --label\/label-text\/label-text-font-size: 8;
+  --label\/label-text\/label-text-font-weight: 700;
+  --label\/label-text\/label-text-letter-spacing: 1;
+  --label\/button\/button-text-font-size: 14;
+  --label\/button\/button-text-font-weight: 700;
+  --label\/button\/button-text-letter-spacing: 0.5;
+  --paragraph\/para-default\/para-default-font-size: 14;
+  --paragraph\/para-default\/para-default-weight-regular: 400;
+  --paragraph\/para-default\/para-default-weight-bold: 600;
+  --paragraph\/para-default\/para-default-letter-spacing: 0.25;
+  --paragraph\/para-default\/para-default-paragraph-spacing: 8;
+  --paragraph\/para-large\/para-large-font-size: 16;
+  --paragraph\/para-large\/para-large-weight-regular: 400;
+  --paragraph\/para-large\/para-large-weight-bold: 600;
+  --paragraph\/para-large\/para-large-letter-spacing: 0;
+  --paragraph\/para-large\/para-large-paragraph-spacing: 8;
+  --paragraph\/para-serif\/para-serif-font-size: 14;
+  --paragraph\/para-serif\/para-serif-weight-regular: 400;
+  --paragraph\/para-serif\/para-serif-weight-bold: 700;
+  --paragraph\/para-serif\/para-serif-letter-spacing: 0.25;
+  --paragraph\/para-serif\/para-serif-paragraph-spacing: 8;
+  --paragraph\/caption-para-default\/caption-para-default-font-size: 12;
+  --paragraph\/caption-para-default\/caption-para-default-weight-regular: 400;
+  --paragraph\/caption-para-default\/caption-para-default-weight-medium: 500;
+  --paragraph\/caption-para-default\/caption-para-default-weight-bold: 700;
+  --paragraph\/caption-para-default\/caption-para-default-letter-spacing: 0.25;
+  --paragraph\/caption-para-default\/caption-para-default-paragraph-spacing: 8;
+  --paragraph\/caption-para-small\/caption-para-small-font-size: 10;
+  --paragraph\/caption-para-small\/caption-para-small-weight-regular: 400;
+  --paragraph\/caption-para-small\/caption-para-small-weight-medium: 500;
+  --paragraph\/caption-para-small\/caption-para-small-weight-bold: 700;
+  --paragraph\/caption-para-small\/caption-para-small-letter-spacing: 0.25;
+  --paragraph\/caption-para-small\/caption-para-small-paragraph-spacing: 8;
+  --heading\/heading-s\/heading-small-font-size: 18;
+  --heading\/heading-s\/heading-small-weight-regular: 500;
+  --heading\/heading-s\/heading-small-weight-bold: 700;
+  --heading\/heading-s\/heading-small-letter-spacing: 0.15000000596046448;
+  --heading\/heading-l\/heading-large-font-size: 20;
+  --heading\/heading-l\/heading-large-weight-regular: 400;
+  --heading\/heading-l\/heading-large-weight-bold: 700;
+  --heading\/heading-l\/heading-large-letter-spacing: 0;
+  --heading\/heading-xl\/heading-xlarge-font-size: 24;
+  --heading\/heading-xl\/heading-xlarge-weight-regular: 400;
+  --heading\/heading-xl\/heading-xlarge-weight-bold: 700;
+  --heading\/heading-xl\/heading-xlarge-letter-spacing: 0.25;
+  --display\/display-s\/display-small-font-size: 32;
+  --display\/display-s\/display-small-weight-regular: 400;
+  --display\/display-s\/display-small-weight-bold: 600;
+  --display\/display-s\/display-small-letter-spacing: 0;
+  --display\/display-l\/display-large-font-size: 40;
+  --display\/display-l\/display-large-weight-regular: 300;
+  --display\/display-l\/display-large-weight-bold: 600;
+  --display\/display-l\/display-large-letter-spacing: -0.5;
+  --display\/display-xl\/display-xlarge-font-size: 48;
+  --display\/display-xl\/display-xlarge-weight-regular: 300;
+  --display\/display-xl\/display-xlarge-weight-bold: 600;
+  --display\/display-xl\/display-xlarge-letter-spacing: -1.5;
+}
+
+.typescale-label-body-default {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-medium {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-large {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-label-body-large-medium {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0px;
+}
+
+.typescale-label-body-large-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0px;
+}
+
+.typescale-paragraph-body-para {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.600000023841858;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-body-para-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.600000023841858;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-serif {
+  font-family: "Noto Serif";
+  font-style: "Regular";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-serif-medium {
+  font-family: "Noto Serif";
+  font-style: "Display Medium";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-serif-bold {
+  font-family: "Noto Serif";
+  font-style: "Display Bold";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-body-serif-large {
+  font-family: "Noto Serif";
+  font-style: "Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0px;
+}
+
+.typescale-label-body-serif-large-medium {
+  font-family: "Noto Serif";
+  font-style: "Medium";
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0px;
+}
+
+.typescale-label-body-serif-large-bold {
+  font-family: "Noto Serif";
+  font-style: "SemiBold";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0px;
+}
+
+.typescale-label-caption-default {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-caption-medium {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-caption-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-caption-small {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-caption-small-medium {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-caption-small-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-label-label-text {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.typescale-label-button-default {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.149999976158142;
+  letter-spacing: 0.5px;
+}
+
+/* About typescale-paragraph-body-large-para: Used for Paragraph text which need more line spacing */
+.typescale-paragraph-body-large-para {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+.typescale-paragraph-body-large-para-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+.typescale-paragraph-body-serif-para {
+  font-family: "Noto Serif";
+  font-style: "Regular";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-body-serif-para-bold {
+  font-family: "Noto Serif";
+  font-style: "Display Bold";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-caption-para {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-caption-para-medium {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-caption-para-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-caption-small-para {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.649999976158142;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-caption-small-para-medium {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.649999976158142;
+  letter-spacing: 0.25px;
+}
+
+.typescale-paragraph-caption-small-para-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.649999976158142;
+  letter-spacing: 0.25px;
+}
+
+.typescale-heading-sans-heading-sans-small {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.15px;
+}
+
+.typescale-heading-sans-heading-sans-small-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.15px;
+}
+
+.typescale-heading-sans-heading-sans-large {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-heading-sans-heading-sans-large-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-heading-sans-heading-sans-xlarge {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-heading-sans-heading-sans-xlarge-bold {
+  font-family: "Inter";
+  font-style: "Bold";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-heading-serif-heading-serif-small {
+  font-family: "Noto Serif";
+  font-style: "Medium";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.15px;
+}
+
+.typescale-display-sans-display-sans-small {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-display-sans-display-sans-small-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-display-sans-display-sans-large {
+  font-family: "Inter";
+  font-style: "Light";
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.2000000476837158;
+  letter-spacing: -0.5px;
+}
+
+.typescale-display-sans-display-sans-large-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: -0.5px;
+}
+
+.typescale-display-sans-display-sans-xlarge {
+  font-family: "Inter";
+  font-style: "Light";
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.2000000476837158;
+  letter-spacing: -1.5px;
+}
+
+.typescale-display-sans-display-sans-xlarge-bold {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: -1.5px;
+}
+
+.typescale-heading-serif-heading-serif-small-bold {
+  font-family: "Noto Serif";
+  font-style: "Bold";
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.15px;
+}
+
+.typescale-heading-serif-heading-serif-large {
+  font-family: "Noto Serif";
+  font-style: "Regular";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-heading-serif-heading-serif-large-bold {
+  font-family: "Noto Serif";
+  font-style: "Bold";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-heading-serif-heading-serif-xlarge {
+  font-family: "Noto Serif";
+  font-style: "Regular";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-heading-serif-heading-serif-xlarge-bold {
+  font-family: "Noto Serif";
+  font-style: "Bold";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0.25px;
+}
+
+.typescale-display-serif-display-serif-small {
+  font-family: "Noto Serif";
+  font-style: "Regular";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-display-serif-display-serif-small-bold {
+  font-family: "Noto Serif";
+  font-style: "SemiBold";
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: 0px;
+}
+
+.typescale-display-serif-display-serif-large {
+  font-family: "Noto Serif";
+  font-style: "Light";
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.2000000476837158;
+  letter-spacing: -0.5px;
+}
+
+.typescale-display-serif-display-serif-large-bold {
+  font-family: "Noto Serif";
+  font-style: "SemiBold";
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: -0.5px;
+}
+
+.typescale-display-serif-display-serif-xlarge {
+  font-family: "Noto Serif";
+  font-style: "Light";
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.2000000476837158;
+  letter-spacing: -1.5px;
+}
+
+.typescale-display-serif-display-serif-xlarge-bold {
+  font-family: "Noto Serif";
+  font-style: "SemiBold";
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2000000476837158;
+  letter-spacing: -1.5px;
+}
+
