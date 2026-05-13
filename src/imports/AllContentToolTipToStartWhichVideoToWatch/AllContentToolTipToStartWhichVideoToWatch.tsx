@@ -66,36 +66,36 @@ function CourseIllustrationGroup2() {
   );
 }
 
-function LiveClassCardTitleMeta() {
+function LiveClassCardTitleMeta({ waitlistJoined }: { waitlistJoined?: boolean }) {
   return (
     <div className="content-stretch flex flex-col gap-[4px] items-start not-italic relative shrink-0 tracking-[0.25px] w-full" data-name="Title + Subtitle">
       <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[1.2] overflow-hidden relative shrink-0 text-[#212121] text-[14px] text-ellipsis w-full">Introduction to HTML</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] overflow-hidden relative shrink-0 text-[#616161] text-[12px] text-ellipsis w-full whitespace-pre-wrap">{`Live Class •  10 PM • 30 Apr`}</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] overflow-hidden relative shrink-0 text-[#616161] text-[12px] text-ellipsis w-full whitespace-pre-wrap">{waitlistJoined ? `Live Class • 10 PM • 30 Apr  Learn lessons before the class` : `Live Class • 10 PM • 30 Apr`}</p>
     </div>
   );
 }
 
-function LiveClassCardCTA({ onJoinWaitlist }: { onJoinWaitlist?: () => void }) {
+function LiveClassCardCTA({ onJoinWaitlist, onLearnCTA, waitlistJoined }: { onJoinWaitlist?: () => void; onLearnCTA?: () => void; waitlistJoined?: boolean }) {
   return (
     <div className="content-center flex flex-wrap gap-[24px] items-center relative shrink-0 w-full" data-name="CTA">
-      <div className="content-stretch flex gap-[8px] items-center justify-center relative shrink-0" data-name="Primary CTA" onClick={onJoinWaitlist} style={{ cursor: 'pointer' }}>
+      <div className="content-stretch flex gap-[8px] items-center justify-center relative shrink-0" data-name="Primary CTA" onClick={waitlistJoined ? onLearnCTA : onJoinWaitlist} style={{ cursor: 'pointer' }}>
         <p
         style={{ fontWeight: 700, fontSize: 14, color: '#004B8C', letterSpacing: '0.5px' }}>
-          Join the waitlist
+          {waitlistJoined ? 'Learn now' : 'Join the waitlist'}
         </p>
       </div>
     </div>
   );
 }
 
-function LiveClassCardContent({ onJoinWaitlist }: { onJoinWaitlist?: () => void }) {
+function LiveClassCardContent({ onJoinWaitlist, onLearnCTA, waitlistJoined }: { onJoinWaitlist?: () => void; onLearnCTA?: () => void; waitlistJoined?: boolean }) {
   return (
     <div className="flex flex-[1_0_0] flex-col gap-[12px] items-start min-w-px pb-[4px] relative" data-name="Content">
       <div style={{ backgroundColor: '#121212', display: 'inline-flex', alignItems: 'center', padding: '2px 4px', borderRadius: '2px' }}>
   <p style={{ fontSize: '8px', fontWeight: 700, color: 'white', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1, margin: 0 }}>UPCOMING</p>
 </div>
-      <LiveClassCardTitleMeta />
-      <LiveClassCardCTA onJoinWaitlist={onJoinWaitlist} />
+      <LiveClassCardTitleMeta waitlistJoined={waitlistJoined} />
+      <LiveClassCardCTA onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} waitlistJoined={waitlistJoined} />
     </div>
   );
 }
@@ -112,7 +112,7 @@ function CarouselDotActive() {
   return <div className="-translate-y-1/2 absolute bg-[#ffd428] right-[181px] rounded-[200px] size-[6px] top-1/2" data-name="Active dot" />;
 }
 
-function LiveClassCard({ onJoinWaitlist }: { onJoinWaitlist?: () => void }) {
+function LiveClassCard({ onJoinWaitlist, onLearnCTA, waitlistJoined }: { onJoinWaitlist?: () => void; onLearnCTA?: () => void; waitlistJoined?: boolean }) {
   return (
     <div className="bg-white content-stretch flex flex-col gap-[8px] items-center pt-[8px] relative shrink-0 w-[360px]">
       <div className="bg-[#f6f6f6] content-stretch flex gap-[16px] items-center min-h-[152px] min-w-[312px] p-[16px] relative rounded-[16px] shrink-0 w-[328px]" data-name="Live Class Card">
@@ -162,7 +162,7 @@ function LiveClassCard({ onJoinWaitlist }: { onJoinWaitlist?: () => void }) {
             </div>
           </div>
         </div>
-        <LiveClassCardContent onJoinWaitlist={onJoinWaitlist} />
+        <LiveClassCardContent onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} waitlistJoined={waitlistJoined} />
       </div>
       <div className="content-stretch flex gap-[4px] items-center justify-center relative shrink-0 w-[328px]" data-name="Carousel Dots">
         <CarouselDotInactive />
@@ -602,19 +602,30 @@ function StudyCardMeta({ title }: { title: string }) {
   );
 }
 
-function JoinWaitlistMeta({ title, meta, onJoinWaitlist }: { title: string; meta: string; onJoinWaitlist?: () => void }) {
+function JoinWaitlistMeta({ title, meta, onJoinWaitlist, onLearnCTA, waitlistJoined, lessonsRemaining }: {
+  title: string; meta: string; onJoinWaitlist?: () => void; onLearnCTA?: () => void; waitlistJoined?: boolean; lessonsRemaining?: number;
+}) {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start justify-center min-w-px relative">
       <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full">
         <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.2] not-italic relative shrink-0 text-[#212121] text-[14px] tracking-[0.25px] w-full">{title}</p>
         <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.2] not-italic relative shrink-0 text-[#616161] text-[12px] tracking-[0.25px] w-full" style={{ fontSize: 12, fontWeight: 400, color: '#616161' }}>{meta}</p>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4, cursor: 'pointer' }} onClick={onJoinWaitlist}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, width: 16, height: 16 }}>
-          <path d="M13.3335 2.88C13.7002 2.88 14.0138 3.00559 14.2749 3.25625C14.536 3.50692 14.6668 3.808 14.6668 4.16V6.32C14.6668 6.43724 14.6279 6.53846 14.5503 6.62375C14.4725 6.70908 14.3724 6.76242 14.2502 6.78375C13.9835 6.86909 13.7642 7.02413 13.592 7.24813C13.4197 7.47212 13.3335 7.72268 13.3335 8C13.3335 8.27733 13.4197 8.52788 13.592 8.75188C13.7642 8.97588 13.9835 9.13092 14.2502 9.21625C14.3724 9.23759 14.4725 9.29093 14.5503 9.37625C14.6279 9.46155 14.6668 9.56276 14.6668 9.68V11.84C14.6668 12.192 14.536 12.4931 14.2749 12.7438C14.0138 12.9944 13.7002 13.12 13.3335 13.12H2.66683C2.30016 13.12 1.98653 12.9944 1.72542 12.7438C1.46431 12.4931 1.3335 12.192 1.3335 11.84V9.68C1.3335 9.56276 1.37238 9.46155 1.45003 9.37625C1.5278 9.29093 1.62796 9.23759 1.75016 9.21625C2.01683 9.13092 2.23614 8.97588 2.40837 8.75188C2.58058 8.52788 2.66683 8.27733 2.66683 8C2.66683 7.72268 2.58058 7.47212 2.40837 7.24813C2.23614 7.02413 2.01683 6.86909 1.75016 6.78375C1.62796 6.76242 1.5278 6.70908 1.45003 6.62375C1.37238 6.53846 1.3335 6.43724 1.3335 6.32V4.16C1.3335 3.808 1.46431 3.50692 1.72542 3.25625C1.98653 3.00559 2.30016 2.88 2.66683 2.88H13.3335ZM8.56266 5.38688C8.48396 5.36022 8.40756 5.35869 8.3335 5.38313C8.25951 5.40755 8.19943 5.45101 8.15316 5.51313L6.07633 8.38C6.01162 8.46885 6.0062 8.56138 6.05941 8.65688C6.1126 8.7522 6.19464 8.79991 6.3055 8.8H7.16683L6.94482 10.2731C6.93557 10.3486 6.95048 10.4187 6.98975 10.4831C7.0291 10.5476 7.08371 10.5958 7.15316 10.6269C7.22243 10.6579 7.29412 10.6645 7.368 10.6469C7.44206 10.6291 7.50458 10.5909 7.5555 10.5331L9.84066 7.90688C9.91936 7.81799 9.93419 7.72223 9.88558 7.62C9.83698 7.51783 9.75262 7.46691 9.63232 7.46688H8.5555L8.77816 5.74C8.78741 5.66453 8.77344 5.59348 8.73649 5.52688C8.69945 5.46021 8.64137 5.41355 8.56266 5.38688Z" fill="#00805C"/>
-        </svg>
-        <p style={{ fontSize: 12, fontWeight: 700, color: '#00805c', lineHeight: 1.2, whiteSpace: 'nowrap', margin: 0 }}>Join the waitlist</p>
-      </div>
+      {waitlistJoined ? (
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4, cursor: 'pointer' }} onClick={onLearnCTA}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+            <path d="M4.49996 14.6667C3.99996 14.6667 3.5694 14.4972 3.20829 14.1583C2.84718 13.8194 2.66663 13.4 2.66663 12.9V3.6C2.66663 3.17778 2.79718 2.8 3.05829 2.46667C3.3194 2.13333 3.66107 1.92222 4.08329 1.83333L9.08329 0.849999C9.4944 0.76111 9.86107 0.849999 10.1833 1.11667C10.5055 1.38333 10.6666 1.72778 10.6666 2.15V10.1C10.6666 10.4222 10.5666 10.7083 10.3666 10.9583C10.1666 11.2083 9.91107 11.3611 9.59996 11.4167L4.34996 12.4667C4.24996 12.4889 4.16663 12.5417 4.09996 12.625C4.03329 12.7083 3.99996 12.8 3.99996 12.9C3.99996 13.0222 4.04996 13.125 4.14996 13.2083C4.24996 13.2917 4.36663 13.3333 4.49996 13.3333H12V3.33333C12 3.14444 12.0638 2.98611 12.1916 2.85833C12.3194 2.73055 12.4777 2.66667 12.6666 2.66667C12.8555 2.66667 13.0138 2.73055 13.1416 2.85833C13.2694 2.98611 13.3333 3.14444 13.3333 3.33333V13.3333C13.3333 13.7 13.2027 14.0139 12.9416 14.275C12.6805 14.5361 12.3666 14.6667 12 14.6667H4.49996ZM5.46663 10.9C5.62218 10.8667 5.74996 10.7889 5.84996 10.6667C5.94996 10.5444 5.99996 10.4056 5.99996 10.25V3.63333C5.99996 3.42222 5.9194 3.25 5.75829 3.11667C5.59718 2.98333 5.41107 2.93889 5.19996 2.98333C5.0444 3.01667 4.91663 3.09444 4.81663 3.21667C4.71663 3.33889 4.66663 3.47778 4.66663 3.63333V10.25C4.66663 10.4611 4.74718 10.6333 4.90829 10.7667C5.0694 10.9 5.25552 10.9444 5.46663 10.9Z" fill="#00805C"/>
+          </svg>
+          <p style={{ fontSize: 12, fontWeight: 700, color: '#00805c', lineHeight: 1.2, whiteSpace: 'nowrap', margin: 0 }}>3 more lessons to learn</p>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4, cursor: 'pointer' }} onClick={onJoinWaitlist}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+            <path d="M13.3335 2.88C13.7002 2.88 14.0138 3.00559 14.2749 3.25625C14.536 3.50692 14.6668 3.808 14.6668 4.16V6.32C14.6668 6.43724 14.6279 6.53846 14.5503 6.62375C14.4725 6.70908 14.3724 6.76242 14.2502 6.78375C13.9835 6.86909 13.7642 7.02413 13.592 7.24813C13.4197 7.47212 13.3335 7.72268 13.3335 8C13.3335 8.27733 13.4197 8.52788 13.592 8.75188C13.7642 8.97588 13.9835 9.13092 14.2502 9.21625C14.3724 9.23759 14.4725 9.29093 14.5503 9.37625C14.6279 9.46155 14.6668 9.56276 14.6668 9.68V11.84C14.6668 12.192 14.536 12.4931 14.2749 12.7438C14.0138 12.9944 13.7002 13.12 13.3335 13.12H2.66683C2.30016 13.12 1.98653 12.9944 1.72542 12.7438C1.46431 12.4931 1.3335 12.192 1.3335 11.84V9.68C1.3335 9.56276 1.37238 9.46155 1.45003 9.37625C1.5278 9.29093 1.62796 9.23759 1.75016 9.21625C2.01683 9.13092 2.23614 8.97588 2.40837 8.75188C2.58058 8.52788 2.66683 8.27733 2.66683 8C2.66683 7.72268 2.58058 7.47212 2.40837 7.24813C2.23614 7.02413 2.01683 6.86909 1.75016 6.78375C1.62796 6.76242 1.5278 6.70908 1.45003 6.62375C1.37238 6.53846 1.3335 6.43724 1.3335 6.32V4.16C1.3335 3.808 1.46431 3.50692 1.72542 3.25625C1.98653 3.00559 2.30016 2.88 2.66683 2.88H13.3335ZM8.56266 5.38688C8.48396 5.36022 8.40756 5.35869 8.3335 5.38313C8.25951 5.40755 8.19943 5.45101 8.15316 5.51313L6.07633 8.38C6.01162 8.46885 6.0062 8.56138 6.05941 8.65688C6.1126 8.7522 6.19464 8.79991 6.3055 8.8H7.16683L6.94482 10.2731C6.93557 10.3486 6.95048 10.4187 6.98975 10.4831C7.0291 10.5476 7.08371 10.5958 7.15316 10.6269C7.22243 10.6579 7.29412 10.6645 7.368 10.6469C7.44206 10.6291 7.50458 10.5909 7.5555 10.5331L9.84066 7.90688C9.91936 7.81799 9.93419 7.72223 9.88558 7.62C9.83698 7.51783 9.75262 7.46691 9.63232 7.46688H8.5555L8.77816 5.74C8.78741 5.66453 8.77344 5.59348 8.73649 5.52688C8.69945 5.46021 8.64137 5.41355 8.56266 5.38688Z" fill="#00805C"/>
+          </svg>
+          <p style={{ fontSize: 12, fontWeight: 700, color: '#00805c', lineHeight: 1.2, whiteSpace: 'nowrap', margin: 0 }}>Join the waitlist</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -691,7 +702,9 @@ function SectionDivider({ label }: { label: string }) {
   );
 }
 
-function ContentList({ onJoinWaitlist, firstRowRef }: { onJoinWaitlist?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null> }) {
+function ContentList({ onJoinWaitlist, onLearnCTA, firstRowRef, waitlistJoined, lessonsRemaining }: {
+  onJoinWaitlist?: () => void; onLearnCTA?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null>; waitlistJoined?: boolean; lessonsRemaining?: number;
+}) {
   const localRef = React.useRef<HTMLDivElement>(null);
   const rowRef = firstRowRef ?? localRef;
   return (
@@ -752,7 +765,10 @@ function ContentList({ onJoinWaitlist, firstRowRef }: { onJoinWaitlist?: () => v
             <JoinWaitlistMeta
             title="Introduction to HTML"
             meta="Live Class •  10 PM • 30 Apr"
-            onJoinWaitlist={onJoinWaitlist} />
+            onJoinWaitlist={onJoinWaitlist}
+            onLearnCTA={onLearnCTA}
+            waitlistJoined={waitlistJoined}
+            lessonsRemaining={lessonsRemaining} />
           </ContentListRow>
 
           {/* Waitlist not yet open */}
@@ -822,12 +838,47 @@ function BackButton() {
   );
 }
 
-    function TopAppBar() {
-      return (
-        <div className="absolute content-stretch flex gap-[8px] h-[64px] items-center left-0 px-[8px] py-[12px] top-0 w-[360px] z-10" data-name="Top App Bar">
+function TopAppBar({ onMenuPress }: { onMenuPress?: () => void }) {
+  return (
+    <div className="absolute content-stretch flex gap-[8px] h-[64px] items-center left-0 px-[8px] py-[12px] top-0 w-[360px] z-10" data-name="Top App Bar">
+      {/* Left side - Back button */}
       <div className="content-stretch flex flex-[1_0_0] gap-[8px] items-center min-w-px relative">
         <BackButton />
         <div className="content-stretch flex flex-[1_0_0] flex-col h-[38px] items-start justify-center min-w-px" />
+      </div>
+      {/* Right side - Hamburger menu */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flexShrink: 0 }}>
+        <div
+          onClick={onMenuPress}
+          style={{
+            width: 48,
+            height: 48,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              backgroundColor: '#f6f6f6',
+              border: '1px solid #f0f0f0',
+              borderRadius: 16,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0px 1px 3px rgba(0,0,0,0.1), 0px 2px 1px rgba(0,0,0,0.06), 0px 1px 1px rgba(0,0,0,0.08)',
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M2.5 5H17.5" stroke="#212121" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M2.5 10H17.5" stroke="#212121" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M2.5 15H17.5" stroke="#212121" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -837,7 +888,7 @@ function BackButton() {
 // Root Screen
 // ─────────────────────────────────────────────
 
-export default function CourseContentScreen({ onJoinWaitlist, firstRowRef }: { onJoinWaitlist?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null> }) {
+export default function CourseContentScreen({ onJoinWaitlist, onLearnCTA, firstRowRef, waitlistJoined, lessonsRemaining, onMenuPress }: { onJoinWaitlist?: () => void; onLearnCTA?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null>; waitlistJoined?: boolean; lessonsRemaining?: number; onMenuPress?: () => void }) {
   return (
     <div className="bg-white relative w-[360px]" data-name="Course Content Screen">
       {/* Status bar - stays absolute over banner */}
@@ -847,7 +898,7 @@ export default function CourseContentScreen({ onJoinWaitlist, firstRowRef }: { o
 
       {/* Top app bar - sits over banner */}
       <div className="absolute top-[40px] left-0 w-full z-10">
-        <TopAppBar />
+        <TopAppBar onMenuPress={onMenuPress} />
       </div>
 
       {/* Banner + Title in normal flow */}
@@ -855,9 +906,9 @@ export default function CourseContentScreen({ onJoinWaitlist, firstRowRef }: { o
 
       {/* Everything below flows naturally */}
       <div className="flex flex-col items-center pb-[24px] gap-[32px]">
-        <LiveClassCard onJoinWaitlist={onJoinWaitlist} />
+        <LiveClassCard onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} waitlistJoined={waitlistJoined} />
         <CourseNavigation />
-        <ContentList onJoinWaitlist={onJoinWaitlist} firstRowRef={firstRowRef} />
+        <ContentList onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} firstRowRef={firstRowRef} waitlistJoined={waitlistJoined} lessonsRemaining={lessonsRemaining} />
         <AssignmentBannerCard />
       </div>
     </div>
