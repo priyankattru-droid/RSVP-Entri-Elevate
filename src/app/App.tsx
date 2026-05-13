@@ -5,20 +5,27 @@ import LearnPrereqsBottomSheet from "../imports/LearnPrereqsBottomSheet/LearnPre
 import WaitlistSnackbar from "../imports/WaitlistSnackbar/WaitlistSnackbar";
 import StartHereTooltip from "../imports/AllContentToolTipToStartWhichVideoToWatch/StartHereTooltip";
 import StateSwitcherMenu from "../imports/StateSwitcherMenu/StateSwitcherMenu";
+import AfterLiveBottomSheet from "../imports/AfterLiveBottomSheet/AfterLiveBottomSheet";
+import WaitlistNotOpenBottomSheet from "../imports/WaitlistNotOpenBottomSheet/WaitlistNotOpenBottomSheet";
 
 const STATE_LABELS: Record<string, string> = {
-  join_waitlist:     "Join the waitlist",
-  learn_prereqs:     "Learn the prerequisites",
-  leave_waitlist:    "Leave the waitlist",
-  ongoing_live:      "On-going live class",
-  after_live:        "After the live class",
-  waitlist_not_open: "Waitlist not yet open",
-  nth_time_joining:  "Returning to live class",
+  join_waitlist:        "Join the waitlist",
+  learn_prereqs:        "Learn the prerequisites",
+  leave_waitlist:       "Leave the waitlist",
+  ongoing_live:         "On-going live (RSVPed)",
+  ongoing_live_no_rsvp: "On-going live (No RSVP)",
+  after_live:           "After the live class",
+  waitlist_not_open:    "Waitlist not yet open",
+  waitlist_full:        "Waitlist full",
+  nth_time_joining:     "Returning to live class",
 };
 
 export default function App() {
   const [showWaitlist, setShowWaitlist] = useState(false);
   const [showLearnPrereqs, setShowLearnPrereqs] = useState(false);
+  const [showAfterLive, setShowAfterLive] = useState(false);
+  const [showWaitlistFull, setShowWaitlistFull] = useState(false);
+  const [showWaitlistNotOpen, setShowWaitlistNotOpen] = useState(false);
   const [showStateSwitcher, setShowStateSwitcher] = useState(false);
   const [appState, setAppState] = useState<string>("join_waitlist");
   // Join confirmation snackbar (Undo)
@@ -29,6 +36,8 @@ export default function App() {
   const [switchSnackbar, setSwitchSnackbar] = useState<string | null>(null);
   // Guard-rail snackbar (Switch → opens state switcher)
   const [guardSnackbar, setGuardSnackbar] = useState<string | null>(null);
+  // "Opening live class…" info snackbar (auto-dismiss, no real action)
+  const [liveOpenSnackbar, setLiveOpenSnackbar] = useState(false);
 
   const phoneFrameRef = useRef<HTMLDivElement>(null);
   const firstRowRef = useRef<HTMLDivElement>(null);
@@ -43,6 +52,24 @@ export default function App() {
       setShowWaitlist(true);
     } else {
       setGuardSnackbar("Switch to 'Join the waitlist' from the ☰ menu");
+    }
+  };
+
+  const handleViewRecordedSession = () => {
+    if (appState === "after_live") {
+      setShowAfterLive(true);
+    } else if (appState === "waitlist_not_open") {
+      setShowWaitlistNotOpen(true);
+    } else {
+      setGuardSnackbar("Switch to 'After the live class' from the ☰ menu");
+    }
+  };
+
+  const handleLiveClassTap = () => {
+    if (appState === "ongoing_live" || appState === "ongoing_live_no_rsvp") {
+      setLiveOpenSnackbar(true);
+    } else {
+      setGuardSnackbar("Switch to 'On-going live' from the ☰ menu");
     }
   };
 
@@ -93,9 +120,12 @@ export default function App() {
           <AllContentToolTipToStartWhichVideoToWatch
             onJoinWaitlist={handleJoinWaitlistTap}
             onLearnCTA={handleLearnCTATap}
+            onLiveClassTap={handleLiveClassTap}
+            onViewRecording={handleViewRecordedSession}
             firstRowRef={firstRowRef}
             waitlistJoined={waitlistJoined}
             lessonsRemaining={3}
+            appState={appState}
             onMenuPress={() => setShowStateSwitcher(true)}
           />
         </div>
@@ -108,6 +138,14 @@ export default function App() {
             onClose={() => setShowWaitlist(false)}
             onJoinWaitlist={handleJoinWaitlist}
           />
+        )}
+
+        {showAfterLive && (
+          <AfterLiveBottomSheet onClose={() => setShowAfterLive(false)} />
+        )}
+
+        {showWaitlistNotOpen && (
+          <WaitlistNotOpenBottomSheet onClose={() => setShowWaitlistNotOpen(false)} />
         )}
 
         {showLearnPrereqs && (
@@ -132,6 +170,16 @@ export default function App() {
             actionLabel="Undo"
             onAction={() => { setJoinSnackbar(false); setAppState("join_waitlist"); }}
             onDismiss={() => setJoinSnackbar(false)}
+          />
+        )}
+
+        {/* "Opening live class…" info snackbar */}
+        {liveOpenSnackbar && (
+          <WaitlistSnackbar
+            message="Opening live class…"
+            actionLabel="OK"
+            onAction={() => setLiveOpenSnackbar(false)}
+            onDismiss={() => setLiveOpenSnackbar(false)}
           />
         )}
 

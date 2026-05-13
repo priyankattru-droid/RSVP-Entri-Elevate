@@ -10,8 +10,9 @@ const STATES = [
   { id: "join_waitlist",    label: "Join the waitlist",         description: "Waitlist is open, user hasn't joined yet" },
   { id: "learn_prereqs",   label: "Learn the prerequisites",   description: "User joined waitlist, needs to complete lessons" },
   { id: "leave_waitlist",  label: "Leave the waitlist",        description: "User is on the waitlist, can leave" },
-  { id: "ongoing_live",    label: "On-going live class",       description: "Live class is currently happening" },
-  { id: "after_live",      label: "After the live class",      description: "Live class has ended, recording available" },
+  { id: "ongoing_live",        label: "On-going live (RSVPed)",       description: "You're on the waitlist, class is live now" },
+  { id: "ongoing_live_no_rsvp", label: "On-going live (No RSVP)",    description: "Didn't RSVP — few seats still available" },
+  { id: "after_live",          label: "After the live class",         description: "Live class has ended, recording available" },
   { id: "waitlist_not_open", label: "Waitlist not yet open",   description: "Too early, waitlist hasn't opened" },
   { id: "nth_time_joining", label: "Returning to live class",  description: "User has attended before, joining again" },
 ];
