@@ -17,7 +17,6 @@ const STATE_LABELS: Record<string, string> = {
   after_live:           "After the live class",
   waitlist_not_open:    "Waitlist not yet open",
   waitlist_full:        "Waitlist full",
-  nth_time_joining:     "Returning to live class",
 };
 
 export default function App() {
@@ -28,6 +27,7 @@ export default function App() {
   const [showWaitlistNotOpen, setShowWaitlistNotOpen] = useState(false);
   const [showStateSwitcher, setShowStateSwitcher] = useState(false);
   const [appState, setAppState] = useState<string>("join_waitlist");
+  const [highlightKey, setHighlightKey] = useState(0);
   // Join confirmation snackbar (Undo)
   const [joinSnackbar, setJoinSnackbar] = useState(false);
   // Leave waitlist snackbar (Undo → back to learn_prereqs)
@@ -98,6 +98,7 @@ export default function App() {
 
   const handleStateSwitch = (newState: string) => {
     setShowStateSwitcher(false);
+    setHighlightKey(prev => prev + 1);
     if (newState === "leave_waitlist") {
       // Leave waitlist is a transition, not a resting state
       setAppState("join_waitlist");
@@ -127,6 +128,7 @@ export default function App() {
             lessonsRemaining={3}
             appState={appState}
             onMenuPress={() => setShowStateSwitcher(true)}
+            highlightKey={highlightKey}
           />
         </div>
 

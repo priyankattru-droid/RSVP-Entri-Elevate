@@ -32,6 +32,7 @@ Interactive prototype for Entri Elevate, an edtech skilling experiment targeting
 - **Subtext:** #616161
 - **Surface:** #f6f6f6
 - **Borders:** #f0f0f0
+
 - **Corner radii:** 8px default, 16px for cards
 - **Spacing tokens:** xs, sm, md, lg, xl, 2xl, 3xl
 - **Tonal pill buttons:** #e6f3ff background, #0061b5 text
@@ -94,3 +95,9 @@ Interactive prototype for Entri Elevate, an edtech skilling experiment targeting
 - Vercel, connected via GitHub
 - No build commands needed beyond Vite defaults
 - Push to main branch triggers auto-deploy
+
+## 4 rules to follow
+- Don’t assume. Don’t hide confusion. Surface tradeoffs.
+- Minimum code that solves the problem. Nothing speculative.
+- Touch only what you must. Clean up only your own mess.
+- Define success criteria. Loop until verified.

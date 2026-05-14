@@ -14,7 +14,6 @@ const STATES = [
   { id: "ongoing_live_no_rsvp", label: "On-going live (No RSVP)",    description: "Didn't RSVP — few seats still available" },
   { id: "after_live",          label: "After the live class",         description: "Live class has ended, recording available" },
   { id: "waitlist_not_open", label: "Waitlist not yet open",   description: "Too early, waitlist hasn't opened" },
-  { id: "nth_time_joining", label: "Returning to live class",  description: "User has attended before, joining again" },
 ];
 
 const StateSwitcherMenu: React.FC<StateSwitcherMenuProps> = ({
@@ -98,6 +97,20 @@ const StateSwitcherMenu: React.FC<StateSwitcherMenuProps> = ({
             </svg>
           </div>
         </div>
+
+        {/* Description */}
+        <p style={{
+          fontFamily: "Inter, sans-serif",
+          fontSize: 12,
+          fontWeight: 400,
+          color: "#616161",
+          lineHeight: 1.5,
+          letterSpacing: "0.25px",
+          margin: 0,
+          padding: "0 24px 16px 24px",
+        }}>
+          This prototype demonstrates different RSVP states for the live class experience. Tap any state below to preview how the screen changes. Look for highlighted elements after switching.
+        </p>
 
         {/* State list */}
         <div style={{ padding: "0 24px 24px 24px", overflowY: "auto" }}>

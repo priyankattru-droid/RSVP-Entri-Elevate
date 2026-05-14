@@ -769,8 +769,8 @@ function SectionDivider({ label }: { label: string }) {
   );
 }
 
-function ContentList({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecording, firstRowRef, waitlistJoined, lessonsRemaining, appState }: {
-  onJoinWaitlist?: () => void; onLearnCTA?: () => void; onLiveClassTap?: () => void; onViewRecording?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null>; waitlistJoined?: boolean; lessonsRemaining?: number; appState?: string;
+function ContentList({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecording, firstRowRef, waitlistJoined, lessonsRemaining, appState, highlightKey }: {
+  onJoinWaitlist?: () => void; onLearnCTA?: () => void; onLiveClassTap?: () => void; onViewRecording?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null>; waitlistJoined?: boolean; lessonsRemaining?: number; appState?: string; highlightKey?: number;
 }) {
   const localRef = React.useRef<HTMLDivElement>(null);
   const rowRef = firstRowRef ?? localRef;
@@ -828,6 +828,7 @@ function ContentList({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecordi
           </ContentListRow>
 
           {/* Live Class row — thumbnail + meta change for ongoing states */}
+          <div key={`lct1-${highlightKey}`} style={{ animation: "stateTransition 0.4s ease-out 0.1s both" }}>
           {(appState === "ongoing_live" || appState === "ongoing_live_no_rsvp") ? (
             <ContentListRow thumbnail={
               <div style={{ width: 100, height: 58, borderRadius: 4, flexShrink: 0, position: "relative", overflow: "hidden" }}>
@@ -942,8 +943,10 @@ function ContentList({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecordi
               lessonsRemaining={lessonsRemaining} />
             </ContentListRow>
           )}
+          </div>
 
           {/* Upcoming live / Waitlist not yet open row */}
+          <div key={`lct2-${highlightKey}`} style={{ animation: "stateTransition 0.4s ease-out 0.15s both" }}>
           {appState === "waitlist_not_open" ? (
             /* LCT row 2 — next upcoming class */
             <ContentListRow thumbnail={<WaitlistNotOpenThumbnail />}>
@@ -972,6 +975,7 @@ function ContentList({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecordi
               <WaitlistNotOpenMeta title="Introduction to HTML content tags" />
             </ContentListRow>
           )}
+          </div>
 
           {/* Assignment (locked) */}
           <ContentListRow thumbnail={<AssignmentThumbnail />}>
@@ -1045,38 +1049,40 @@ function TopAppBar({ onMenuPress }: { onMenuPress?: () => void }) {
       </div>
       {/* Right side - Hamburger menu (hidden when onMenuPress is undefined) */}
       {onMenuPress && (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flexShrink: 0 }}>
-          <div
-            onClick={onMenuPress}
-            style={{
-              width: 48,
-              height: 48,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-            }}
-          >
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                backgroundColor: '#f6f6f6',
-                border: '1px solid #f0f0f0',
-                borderRadius: 16,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0px 1px 3px rgba(0,0,0,0.1), 0px 2px 1px rgba(0,0,0,0.06), 0px 1px 1px rgba(0,0,0,0.08)',
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M2.5 5H17.5" stroke="#212121" strokeWidth="1.5" strokeLinecap="round"/>
-                <path d="M2.5 10H17.5" stroke="#212121" strokeWidth="1.5" strokeLinecap="round"/>
-                <path d="M2.5 15H17.5" stroke="#212121" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </div>
-          </div>
+        <div onClick={onMenuPress} style={{ cursor: 'pointer', flexShrink: 0 }}>
+          <svg width="48" height="48" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_ddd_menu)">
+              <path d="M5 20C5 11.1634 12.1634 4 21 4H29C37.8366 4 45 11.1634 45 20V28C45 36.8366 37.8366 44 29 44H21C12.1634 44 5 36.8366 5 28V20Z" fill="#F6F6F6"/>
+              <path d="M23 3C23.5523 3 24 3.44772 24 4H26C26 3.44772 26.4477 3 27 3H29C29.5639 3 30.1216 3.0273 30.6719 3.08105L31.2188 3.14355C31.7664 3.21499 32.1525 3.717 32.0811 4.26465C32.0797 4.2752 32.0769 4.28547 32.0752 4.2959C32.7986 4.43674 33.5044 4.62656 34.1895 4.86133C34.1933 4.85127 34.197 4.84106 34.2012 4.83105C34.3995 4.35288 34.9258 4.11009 35.4111 4.25586L35.5078 4.29004C36.7175 4.79166 37.8561 5.42921 38.9053 6.18262L39.3496 6.5127C39.7875 6.84922 39.8697 7.47712 39.5332 7.91504C39.5269 7.9233 39.5192 7.93047 39.5127 7.93848C40.0631 8.41865 40.5803 8.93592 41.0605 9.48633C41.0686 9.47975 41.0767 9.47317 41.085 9.4668C41.4955 9.1513 42.073 9.20361 42.4209 9.57227L42.4873 9.65039C43.2737 10.6737 43.9464 11.7893 44.4863 12.9785L44.71 13.4922C44.9215 14.0023 44.679 14.5872 44.1689 14.7988C44.1588 14.8031 44.1479 14.8057 44.1377 14.8096C44.3725 15.4946 44.5622 16.2004 44.7031 16.9238C44.7138 16.9221 44.7245 16.9204 44.7354 16.9189C45.2489 16.852 45.7221 17.187 45.8379 17.6807L45.8564 17.7812C45.9512 18.5079 46 19.2485 46 20V22C46 22.5523 45.5523 23 45 23V25C45.5523 25 46 25.4477 46 26V28C46 28.7515 45.9512 29.4921 45.8564 30.2188C45.785 30.7664 45.283 31.1525 44.7354 31.0811C44.7245 31.0796 44.7139 31.077 44.7031 31.0752C44.5623 31.7987 44.3725 32.5044 44.1377 33.1895C44.148 33.1934 44.1587 33.1969 44.1689 33.2012C44.679 33.4128 44.9215 33.9977 44.71 34.5078C44.1366 35.8903 43.3859 37.1802 42.4873 38.3496C42.1508 38.7875 41.5229 38.8697 41.085 38.5332C41.0765 38.5267 41.0687 38.5194 41.0605 38.5127C40.5803 39.0632 40.0632 39.5803 39.5127 40.0605C39.5194 40.0687 39.5267 40.0765 39.5332 40.085C39.8697 40.5229 39.7875 41.1508 39.3496 41.4873C38.1802 42.3859 36.8903 43.1366 35.5078 43.71C34.9977 43.9215 34.4128 43.679 34.2012 43.1689C34.1969 43.1587 34.1934 43.148 34.1895 43.1377C33.5044 43.3725 32.7987 43.5623 32.0752 43.7031C32.077 43.7139 32.0796 43.7245 32.0811 43.7354C32.1525 44.283 31.7664 44.785 31.2188 44.8564C30.4921 44.9512 29.7515 45 29 45H27C26.4823 45 26.0562 44.6067 26.0049 44.1025L26 44H24L23.9951 44.1025C23.9438 44.6067 23.5177 45 23 45H21C20.4361 45 19.8784 44.9727 19.3281 44.9189L18.7812 44.8564C18.2336 44.785 17.8475 44.283 17.9189 43.7354C17.9204 43.7245 17.9221 43.7138 17.9238 43.7031C17.2004 43.5622 16.4946 43.3725 15.8096 43.1377C15.8057 43.1479 15.8031 43.1588 15.7988 43.1689C15.6005 43.6471 15.0742 43.8899 14.5889 43.7441L14.4922 43.71C13.2825 43.2083 12.1439 42.5708 11.0947 41.8174L10.6504 41.4873C10.2125 41.1508 10.1303 40.5229 10.4668 40.085C10.4732 40.0767 10.4797 40.0686 10.4863 40.0605C9.93592 39.5803 9.41865 39.0631 8.93848 38.5127C8.93047 38.5192 8.9233 38.5269 8.91504 38.5332C8.50448 38.8487 7.92696 38.7964 7.5791 38.4277L7.5127 38.3496C6.72634 37.3263 6.05365 36.2107 5.51367 35.0215L5.29004 34.5078C5.0785 33.9977 5.32095 33.4128 5.83105 33.2012C5.84106 33.197 5.85127 33.1933 5.86133 33.1895C5.62656 32.5044 5.43674 31.7986 5.2959 31.0752C5.28547 31.0769 5.2752 31.0797 5.26465 31.0811C4.75108 31.148 4.27794 30.813 4.16211 30.3193L4.14355 30.2188C4.04879 29.4921 4 28.7515 4 28V26L4.00488 25.8975C4.05621 25.3933 4.48232 25 5 25V23C4.44772 23 4 22.5523 4 22V20L4.00879 19.4385C4.02696 18.8791 4.07248 18.3262 4.14355 17.7812C4.21499 17.2336 4.717 16.8475 5.26465 16.9189C5.27514 16.9203 5.28552 16.9221 5.2959 16.9238C5.43678 16.2004 5.62653 15.4946 5.86133 14.8096C5.85138 14.8058 5.84095 14.8029 5.83105 14.7988C5.32095 14.5872 5.0785 14.0023 5.29004 13.4922C5.86335 12.1097 6.61405 10.8198 7.5127 9.65039C7.84922 9.21247 8.47712 9.13028 8.91504 9.4668C8.92313 9.47302 8.93063 9.47991 8.93848 9.48633C9.41865 8.93592 9.93592 8.41865 10.4863 7.93848C10.4799 7.93063 10.473 7.92313 10.4668 7.91504C10.1303 7.47712 10.2125 6.84922 10.6504 6.5127C11.8198 5.61405 13.1097 4.86335 14.4922 4.29004C15.0023 4.0785 15.5872 4.32095 15.7988 4.83105C15.8029 4.84095 15.8058 4.85138 15.8096 4.86133C16.4946 4.62653 17.2004 4.43678 17.9238 4.2959C17.9221 4.28552 17.9203 4.27514 17.9189 4.26465C17.8475 3.717 18.2336 3.21499 18.7812 3.14355C19.5079 3.04879 20.2485 3 21 3H23Z" stroke="#FFD428" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 4"/>
+              <g clipPath="url(#clip0_menu)">
+                <path d="M18.3333 29H31.6667C32.125 29 32.5 28.625 32.5 28.1667C32.5 27.7083 32.125 27.3333 31.6667 27.3333H18.3333C17.875 27.3333 17.5 27.7083 17.5 28.1667C17.5 28.625 17.875 29 18.3333 29ZM18.3333 24.8333H31.6667C32.125 24.8333 32.5 24.4583 32.5 24C32.5 23.5417 32.125 23.1667 31.6667 23.1667H18.3333C17.875 23.1667 17.5 23.5417 17.5 24C17.5 24.4583 17.875 24.8333 18.3333 24.8333ZM17.5 19.8333C17.5 20.2917 17.875 20.6667 18.3333 20.6667H31.6667C32.125 20.6667 32.5 20.2917 32.5 19.8333C32.5 19.375 32.125 19 31.6667 19H18.3333C17.875 19 17.5 19.375 17.5 19.8333Z" fill="black"/>
+              </g>
+            </g>
+            <defs>
+              <filter id="filter0_ddd_menu" x="0" y="0" width="50" height="50" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="1"/>
+                <feGaussianBlur stdDeviation="1.5"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="2"/>
+                <feGaussianBlur stdDeviation="0.5"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+                <feBlend mode="normal" in2="effect1" result="effect2"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="1"/>
+                <feGaussianBlur stdDeviation="0.5"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                <feBlend mode="normal" in2="effect2" result="effect3"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect3" result="shape"/>
+              </filter>
+              <clipPath id="clip0_menu">
+                <rect width="20" height="20" fill="white" transform="translate(15 14)"/>
+              </clipPath>
+            </defs>
+          </svg>
         </div>
       )}
     </div>
@@ -1087,31 +1093,42 @@ function TopAppBar({ onMenuPress }: { onMenuPress?: () => void }) {
 // Root Screen
 // ─────────────────────────────────────────────
 
-export default function CourseContentScreen({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecording, firstRowRef, waitlistJoined, lessonsRemaining, onMenuPress, appState }: { onJoinWaitlist?: () => void; onLearnCTA?: () => void; onLiveClassTap?: () => void; onViewRecording?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null>; waitlistJoined?: boolean; lessonsRemaining?: number; onMenuPress?: () => void; appState?: string }) {
+export default function CourseContentScreen({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecording, firstRowRef, waitlistJoined, lessonsRemaining, onMenuPress, appState, highlightKey }: { onJoinWaitlist?: () => void; onLearnCTA?: () => void; onLiveClassTap?: () => void; onViewRecording?: () => void; firstRowRef?: React.RefObject<HTMLDivElement | null>; waitlistJoined?: boolean; lessonsRemaining?: number; onMenuPress?: () => void; appState?: string; highlightKey?: number }) {
   return (
-    <div className="bg-white relative w-[360px]" data-name="Course Content Screen">
-      {/* Status bar - stays absolute over banner */}
-      <div className="absolute top-0 left-0 w-full h-[40px] bg-white px-[16px] z-10">
-        <AppStatusBar />
-      </div>
+    <>
+      <style>{`
+        @keyframes stateTransition {
+          0% { opacity: 0; transform: scale(0.95); }
+          60% { opacity: 1; transform: scale(1.02); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
+      <div className="bg-white relative w-[360px]" data-name="Course Content Screen">
+        {/* Status bar - stays absolute over banner */}
+        <div className="absolute top-0 left-0 w-full h-[40px] bg-white px-[16px] z-10">
+          <AppStatusBar />
+        </div>
 
-      {/* Top app bar - sits over banner */}
-      <div className="absolute top-[40px] left-0 w-full z-10">
-        <TopAppBar onMenuPress={onMenuPress} />
-      </div>
+        {/* Top app bar - sits over banner */}
+        <div className="absolute top-[40px] left-0 w-full z-10">
+          <TopAppBar onMenuPress={onMenuPress} />
+        </div>
 
-      {/* Banner + Title in normal flow */}
-      <CourseTitleAndThumbnail />
+        {/* Banner + Title in normal flow */}
+        <CourseTitleAndThumbnail />
 
-      {/* Everything below flows naturally */}
-      <div className="flex flex-col items-center pb-[24px] gap-[32px]">
-        {appState !== "waitlist_full" && (
-          <LiveClassCard onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} waitlistJoined={waitlistJoined} appState={appState} onLiveClassTap={onLiveClassTap} />
-        )}
-        <CourseNavigation />
-        <ContentList onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} onLiveClassTap={onLiveClassTap} onViewRecording={onViewRecording} firstRowRef={firstRowRef} waitlistJoined={waitlistJoined} lessonsRemaining={lessonsRemaining} appState={appState} />
-        <AssignmentBannerCard />
+        {/* Everything below flows naturally */}
+        <div className="flex flex-col items-center pb-[24px] gap-[32px]">
+          {appState !== "waitlist_full" && (
+            <div key={`card-${highlightKey}`} style={{ animation: "stateTransition 0.4s ease-out" }}>
+              <LiveClassCard onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} waitlistJoined={waitlistJoined} appState={appState} onLiveClassTap={onLiveClassTap} />
+            </div>
+          )}
+          <CourseNavigation />
+          <ContentList onJoinWaitlist={onJoinWaitlist} onLearnCTA={onLearnCTA} onLiveClassTap={onLiveClassTap} onViewRecording={onViewRecording} firstRowRef={firstRowRef} waitlistJoined={waitlistJoined} lessonsRemaining={lessonsRemaining} appState={appState} highlightKey={highlightKey} />
+          <AssignmentBannerCard />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
