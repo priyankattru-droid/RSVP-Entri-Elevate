@@ -3,7 +3,6 @@ import svgPaths from "./svg-vh9tqy82t3";
 const imgEntriElevateFullStackWebDevelopment1 = "/a5d7005dafd61cc9eb434ffe52d42cd9b4b9b22c.png";
 const imgVideoThumbnail = "/ee3ba5daace8f1e90a116b640177442ae674610f.png";
 const imgTestPlatform1 = "/bd49b152f1633c72e1664d3f3ed1f06cf41f1216.png";
-const imgImage = "/9a5440c44a9fb4f392324a1a89dfafcfc8aba267.png";
 import AppStatusBar from "../AppStatusBar-1/AppStatusBar-1-13247";
 import Chips from "../Chips/Chips";
 
@@ -994,11 +993,11 @@ function ContentList({ onJoinWaitlist, onLearnCTA, onLiveClassTap, onViewRecordi
 
 function AssignmentBannerCard() {
   return (
-    <div style={{ width: 328, height: 100, display: 'flex', flexDirection: 'row', alignItems: 'flex-end', padding: '0px 16px 0px 0px', gap: 12, background: 'white', border: '2px solid #f0f0f0', borderRadius: 8 }}>
-      <div style={{ width: 100, height: 100, flexShrink: 0, position: 'relative' }}>
-        <img alt="" src={imgImage} style={{ position: 'absolute', width: 124, height: 124, right: -4, bottom: 0 }} />
+    <div style={{ width: 328, height: 104, display: 'flex', flexDirection: 'row', alignItems: 'center', background: 'white', border: '2px solid #f0f0f0', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ width: 100, height: 104, flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
+        <img alt="" src="/tourism-assignment-thumb.png" style={{ position: 'absolute', width: 124, height: 124, left: -20, top: 0, objectFit: 'cover' }} />
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', padding: '16px 0px', gap: 8, flex: 1 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', padding: '0 16px', gap: 8, flex: 1 }}>
         <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14, color: '#212121', letterSpacing: '0.25px', lineHeight: 1.2, margin: 0 }}>
           Build your Tourism Websites by using HTML5, CSS
         </p>
